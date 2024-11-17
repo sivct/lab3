@@ -1,8 +1,9 @@
 #include <iostream>
 #include <cmath>
+#include <string>
 
 
-
+bool CheckNat(int32_t num);
 void OutputEnterNum();
 void InputNumber(int32_t&);
 int32_t Counter_digit_of_num(int32_t);
@@ -35,6 +36,12 @@ void OutputEnterSection() {
 void InputNumber(int32_t& num) {
 	OutputEnterNum();
 	std::cin >> num;
+	while (num <= 0) {
+		if (CheckNat(num) == 0) {
+			std::cout << "Num is not natural(((\n" << "Enter new nat num >> \n";
+			std::cin >> num;
+		}
+	}
 }
 void InputSection(int32_t& leftboard, int32_t& rightboard) {
 	OutputEnterSection();
@@ -60,14 +67,14 @@ void FriendNum(int32_t num) {
 }
 void AmstrongNums(int32_t leftboard, int32_t rightboard) {
 	int32_t amstrnum{ 0 }, temp{ 0 }, count_digit_of_num{ 0 }; double sum{ 0 };
-	for (int32_t num{ leftboard }; num <= rightboard; ++num) {					//Ïåðåáîð âñåõ ÷èñåë íà îòðåçêå.
-		count_digit_of_num = Counter_digit_of_num(num);							//Êîëëè÷åñòâî öèâð â ÷èñëå (äëÿ âîçâåäåíèÿ â ñòåïåíü).
-		for (int32_t digit{ 1 }; digit < 10; ++digit) {							//Ïåðåáîð öèâð â ÷èñëå.
+	for (int32_t num{ leftboard }; num <= rightboard; ++num) {					//ÐŸÐµÑ€ÐµÐ±Ð¾Ñ€ Ð²ÑÐµÑ… Ñ‡Ð¸ÑÐµÐ» Ð½Ð° Ð¾Ñ‚Ñ€ÐµÐ·ÐºÐµ.
+		count_digit_of_num = Counter_digit_of_num(num);							//ÐšÐ¾Ð»Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ†Ð¸Ð²Ñ€ Ð² Ñ‡Ð¸ÑÐ»Ðµ (Ð´Ð»Ñ Ð²Ð¾Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ñ Ð² ÑÑ‚ÐµÐ¿ÐµÐ½ÑŒ).
+		for (int32_t digit{ 1 }; digit < 10; ++digit) {							//ÐŸÐµÑ€ÐµÐ±Ð¾Ñ€ Ñ†Ð¸Ð²Ñ€ Ð² Ñ‡Ð¸ÑÐ»Ðµ.
 			temp = num;
 			while (temp != 0) {
-				int32_t temp_digit = temp % 10;
-				if (digit == temp_digit) {
-					sum += pow(digit, count_digit_of_num);
+				int32_t temp_digit = temp % 10;									//Ð§Ð¸ÑÐ»Ð¾ Ð¸Ð· Num.
+				if (digit == temp_digit) {										//Ð•ÑÐ»Ð¸ Ð¿ÐµÑ€ÐµÐ±Ð¸Ñ€Ð°ÐµÐ¼Ð¾Ðµ Ñ†Ð¸Ñ„Ñ€Ð° ÐµÑÑ‚ÑŒ Ð² Num,
+					sum += pow(digit, count_digit_of_num);						//Ñ‚Ð¾ Ðº Ð½Ð°ÑˆÐµÐ¹ ÑÑƒÐ¼Ð¼Ðµ Ð¿Ñ€Ð¸Ð±Ð¾Ð²Ð»ÑÐµÐ¼ ÑÑ‚Ñƒ Ñ†Ð¸Ñ„Ñ€Ñƒ Ð² ÑÑ‚ÐµÐ¿ÐµÐ½Ð¸ Counter_digit_of_num.  
 				}
 				temp /= 10;
 			}
@@ -87,4 +94,9 @@ int32_t Counter_digit_of_num(int32_t num) {
 		++count_digit_of_num;
 	}
 	return count_digit_of_num;
+}
+
+
+bool CheckNat(int32_t num) {
+	return num > 0;
 }
